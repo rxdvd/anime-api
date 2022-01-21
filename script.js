@@ -5,23 +5,20 @@ button.addEventListener('click', () => {
 });
 
 function getRandomAnime(){
-    fetch("http://localhost:3000")
+    fetch("http://localhost:3000/animes/random")
     .then(response => response.json())
     .then(renderRandomAnime);
 }
 
 function renderRandomAnime(json){
-    const title = document.querySelector("");
-    const summary = document.querySelector("");
-    const genres = document.querySelector("");
-    const episodes = document.querySelector("");
-    const seasons = document.querySelector("");
-    const year = document.querySelector("");
+    const container = document.querySelector(".result");
 
-    title.textContent = json.title;
-    summary.textContent = json.summary;
-    genres.textContent = json.genres.join(", ");
-    episodes.textContent = json.episodes;
-    seasons.textContent = json.seasons;
-    year.textContent = json.year;
+    container.innerHTML = "";
+
+    container.innerHTML += "Title: " + json.title + "<br/>";
+    container.innerHTML += "Summary: " + json.summary + "<br/>";
+    container.innerHTML += "Genres: " + json.genres.join(", ") + "<br/>";
+    container.innerHTML += "Episodes: " + json.episodes + "<br/>";
+    container.innerHTML += "Seasons: " + json.seasons + "<br/>";
+    container.innerHTML += "Year: " + json.year;
 }

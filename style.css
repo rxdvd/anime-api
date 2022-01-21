@@ -19,3 +19,8 @@ h1 {
     margin: 50px;
 }
 
+.result {
+    text-align: left;
+    width: 600px;
+    margin-left: 600px;
+}
