@@ -33,7 +33,7 @@ describe('API', () => {
     });
 
     it('undefined routes respond with status code 404', (done) => {
-        request(api)
+        request(app)
         .get('/aaaaa')
         .expect(404, done);
     });
@@ -44,22 +44,22 @@ describe('API', () => {
         .expect(405, done);
     });
 
-    describe('GET /anime', () => {
+    describe('GET /animes', () => {
         it('responds with status code 200', (done) => {
             request(app)
-            .get('/anime')
+            .get('/animes')
             .expect(200, done);
         });
 
         it('responds with json', (done) => {
             request(app)
-            .get('/anime')
+            .get('/animes')
             .expect('Content-Type', /json/, done);
         });
 
         it('responds with array', (done) => {
             request(app)
-            .get('/anime')
+            .get('/animes')
             .end((err, res) => {
                 if (err) { return done(err); }
 
@@ -69,28 +69,28 @@ describe('API', () => {
         });
     });
 
-    describe('GET /anime/{id}', () => {
+    describe('GET /animes/{id}', () => {
         it('responds with status code 200', (done) => {
             request(app)
-            .get('/anime/0')
+            .get('/animes/0')
             .expect(200, done);
         });
 
         it('responds with status code 404 for unknown id', (done) => {
             request(app)
-            .get('/anime/5000')
+            .get('/animes/5000')
             .expect(404, done);
         });
 
         it('responds with json', (done) => {
             request(app)
-            .get('/anime/0')
+            .get('/animes/0')
             .expect('Content-Type', /json/, done);
         });
 
         it('responds with object', (done) => {
             request(app)
-            .get('/anime/0')
+            .get('/animes/0')
             .end((err, res) => {
                 if (err) { return done(err); }
 
@@ -101,7 +101,7 @@ describe('API', () => {
 
         it('responds with correct anime data', (done) => {
             request(app)
-            .get('anime')
+            .get('/animes/0')
             .expect({
                 "id": 0,
                 "title": "Attack on Titan",
@@ -119,24 +119,24 @@ describe('API', () => {
         });
     });
 
-    describe('POST /anime', () => {
+    describe('POST /animes', () => {
         it('responds with status code 201', (done) => {
             request(app)
-            .post('/anime')
+            .post('/animes')
             .send(testAnime)
             .expect(201, done);
         });
 
         it('responds with json', (done) => {
             request(app)
-            .post('/anime')
+            .post('/animes')
             .send(testAnime)
             .expect('Content-Type', /json/, done);
         });
 
         it('responds with object', (done) => {
             request(app)
-            .post('/anime')
+            .post('/animes')
             .send(testAnime)
             .end((err, res) => {
                 if (err) { return done(err); }
@@ -148,30 +148,30 @@ describe('API', () => {
 
         it('responds with the correct data', (done) => {
             request(app)
-            .post('/anime')
+            .post('/animes')
             .send(testAnime)
-            .expect({ id: 10, ...testAnime }, done);
+            .expect({ id: 14, ...testAnime }, done);
         });
     });
 
-    describe('PATCH /anime/{id}', () => {
+    describe('PATCH /animes/{id}', () => {
         it('responds with status code 200', (done) => {
             request(app)
-            .patch('/anime/3')
+            .patch('/animes/3')
             .send(patchAnime)
             .expect(200, done);
         });
 
         it('responds with json', (done) => {
             request(app)
-            .patch('/anime/3')
+            .patch('/animes/3')
             .send(patchAnime)
             .expect('Content-Type', /json/, done);
         });
 
         it('responds with object', (done) => {
             request(app)
-            .patch('/anime/3')
+            .patch('/animes/3')
             .send(patchAnime)
             .end((err, res) => {
                 if (err) { return done(err); }
@@ -183,7 +183,7 @@ describe('API', () => {
 
         it('responds with the correct data', (done) => {
             request(app)
-            .patch('/anime/3')
+            .patch('/animes/3')
             .send(patchAnime)
             .expect({
                 "id": 3,
@@ -202,27 +202,19 @@ describe('API', () => {
         });
     });
 
-    describe('DELETE /anime/{id}', () => {
-        it('responds with status code 204 and deletes an entry', async (done) => {
-            await request(app)
-            .delete('/anime/1')
+    describe('DELETE /animes/{id}', () => {
+        it('responds with status code 204', (done) => {
+            request(app)
+            .delete('/animes/1')
             .expect(204, done);
-
-            const newData = await request(app).get('/anime');
-
-            expect(newData.body.length).toBe(9);
         });
     });
 
-    describe('DELETE /anime', () => {
-        it('responds with status code 204 and deletes all data', async (done) => {
-            await request(app)
-            .delete('/anime')
+    describe('DELETE /animes', () => {
+        it('responds with status code 204', (done) => {
+            request(app)
+            .delete('/animes')
             .expect(204, done);
-
-            const newData = await request(app).get('/anime');
-
-            expect(newData.body.length).toBe(0);
         });
     });
 });
