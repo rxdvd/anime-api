@@ -16,6 +16,12 @@ app.get("/animes", (req, res) => {
     res.json(animes);
 });
 
+// GET /animes/random - get specific anime data
+app.get("/animes/random", (req, res) => {
+    let randomAnime = animes[Math.floor(Math.random() * animes.length)];
+    res.json(randomAnime);
+});
+
 // GET /anime/:id - get specific anime data
 app.get("/animes/:id", (req, res) => {
     try {
