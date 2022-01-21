@@ -16,7 +16,7 @@ app.get("/animes", (req, res) => {
     res.json(animes);
 });
 
-// GET /animes/random - get specific anime data
+// GET /animes/random - get random anime data
 app.get("/animes/random", (req, res) => {
     let randomAnime = animes[Math.floor(Math.random() * animes.length)];
     res.json(randomAnime);
