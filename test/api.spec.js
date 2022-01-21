@@ -1,12 +1,36 @@
 const request = require('supertest');
-const server = require('../server');
+const app = require('../server');
 
 describe('API', () => {
-    let api;
+    it('GET / responds with status code 200', (done) => {
+        request(app)
+        .get('/')
+        .expect(200, done);
+    });
 
-    beforeAll(() => {
-        api = server.listen(8000, () => {
-            console.log('Test server running on port 8000');
+    it('POST / responds with status code 405', (done) => {
+        request(app)
+        .post('/')
+        .expect(405, done);
+    });
+
+    describe('GET /anime', () => {
+        it('responds with status code 200', (done) => {
+            request(app)
+            .get('/anime')
+            .expect(200, done);
         });
+
+        it('responds with json', (done) => {
+            request(app)
+            .get('anime')
+            .expect('Content-Type', /json/, done);
+        });
+
+        // it('responds with json', (done) => {
+        //     request(app)
+        //     .get('anime')
+        //     .expect('Content-Type', /json/, done);
+        // });
     })
 });
