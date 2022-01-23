@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "concurrently \"node index.js\" \"python -m http.server -d public\"",
+    "start": "node index.js",
     "test": "jest --detectOpenHandles",
-    "dev": "concurrently \"nodemon index.js\" \"python -m http.server -d public\""
+    "dev": "nodemon index.js"
   },
   "keywords": [],
   "author": "",
@@ -17,7 +17,6 @@
     "supertest": "^6.2.2"
   },
   "dependencies": {
-    "concurrently": "^7.0.0",
     "cors": "^2.8.5",
     "express": "^4.17.2"
   }

@@ -7,7 +7,9 @@ app.use(express.json());
 
 // import routes
 const animeRoutes = require("./routes/animes");
+const demoRoutes = require("./routes/demo");
 app.use('/animes', animeRoutes);
+app.use('/demo', demoRoutes);
 
 app.get('/', (req, res) => {
     res.send('Hello world!');
