@@ -62,9 +62,12 @@ describe('API', () => {
             .get('/animes')
             .end((err, res) => {
                 if (err) { return done(err); }
-
-                expect(isArray(res.body)).toBe(true);
-                done();
+                try{
+                    expect(isArray(res.body)).toBe(true);
+                    done();
+                } catch(err) {
+                    done(err);
+                }
             });
         });
     });
@@ -93,9 +96,12 @@ describe('API', () => {
             .get('/animes/0')
             .end((err, res) => {
                 if (err) { return done(err); }
-
-                expect(isObject(res.body)).toBe(true);
-                done();
+                try{
+                    expect(isObject(res.body)).toBe(true);
+                    done();
+                } catch(err) {
+                    done(err);
+                }
             });
         });
 
@@ -140,9 +146,12 @@ describe('API', () => {
             .send(testAnime)
             .end((err, res) => {
                 if (err) { return done(err); }
-
-                expect(isObject(res.body)).toBe(true);
-                done();
+                try{
+                    expect(isObject(res.body)).toBe(true);
+                    done();
+                } catch(err) {
+                    done(err);
+                }
             });
         });
 
@@ -175,9 +184,12 @@ describe('API', () => {
             .send(patchAnime)
             .end((err, res) => {
                 if (err) { return done(err); }
-
-                expect(isObject(res.body)).toBe(true);
-                done();
+                try{
+                    expect(isObject(res.body)).toBe(true);
+                    done();
+                } catch(err) {
+                    done(err);
+                }
             });
         });
 
